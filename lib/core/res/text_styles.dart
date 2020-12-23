@@ -62,8 +62,8 @@ class AppTextStyles {
       TextStyle(color: AppColors.black, fontSize: Constants.fontSize17, fontFamily: 'Poppins-Light',
           fontWeight: FontWeight.w400);
 
-  static TextStyle get normalFont20 =>
-      TextStyle(color: AppColors.white, fontSize: Constants.buttonFontSize20, fontFamily: 'Poppins-Light',
+  static TextStyle get normalLightFont14 =>
+      TextStyle(color: AppColors.black, fontSize: Constants.fontSize14, fontFamily: 'Poppins-Light',
           fontWeight: FontWeight.w400);
 
   static TextStyle get headingTextItalic30 =>

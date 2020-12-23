@@ -13,6 +13,9 @@ class Constants{
   static const double largeFontSize24 = 24.0;
   static const double extraLargeFontSize30 = 30.0;
   static const double fontSize17 = 17.0;
+  static const double fontSize14 = 14.0;
+
+
 
   // router
 

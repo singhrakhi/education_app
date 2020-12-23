@@ -67,10 +67,10 @@ class _HomeState extends State<Home> {
     var drawerOptions = <Widget>[];
     for (var i = 0; i < widget.drawerItems.length; i++) {
       var d = widget.drawerItems[i];
-      drawerOptions.add(new ListTile(
-        trailing:new Icon(d.icon) ,
-        title: new Text(d.title),
-        subtitle: new Text(d.subTitle),
+      drawerOptions.add( ListTile(
+        trailing: Icon(d.icon,color: AppColors.black,) ,
+        title: Text(d.title,style: AppTextStyles.blackRegular16,),
+        subtitle: Text(d.subTitle, style: AppTextStyles.normalLightFont14,),
         selected: i == _selectedDrawerIndex,
         onTap: () => _onSelectItem(i),
       ));
