@@ -4,37 +4,59 @@ import 'package:education_app/core/res/text_styles.dart';
 import 'package:education_app/core/utils/device_size.dart';
 import 'package:education_app/core/utils/widget.dart';
 import 'package:flutter/material.dart';
+
 class HomeFrag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      body: SingleChildScrollView(
-        child: Expanded(
-          child: Column(
-            children: [
-              Container(
-                height: DeviceSize.height(context) / 13,
-                decoration: new BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: new BorderRadius.all(const Radius.circular(20.0),
-                    )
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(Strings.search,style: AppTextStyles.regular16,),
-                      customRoundButton(Icons.search,context),
-
-                    ],
+      body: Column(
+        children: [
+          Container(
+            height: DeviceSize.height(context) / 9,
+            decoration: new BoxDecoration(
+                color: Colors.white,
+                borderRadius: new BorderRadius.all(
+                  const Radius.circular(20.0),
+                )),
+            child: Container(
+              height: DeviceSize.height(context) / 13,
+              margin: EdgeInsets.only(left: 20.0, top: 20.0, right: 20.0),
+              padding: const EdgeInsets.all(10.0),
+              decoration: new BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: new BorderRadius.all(
+                    const Radius.circular(40.0),
+                  )),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    Strings.search,
+                    style: AppTextStyles.regular16,
                   ),
-                ),
-              )
-            ],
+                  customRoundButton(Icons.search, context),
+                ],
+              ),
+            ),
           ),
-        ),
+
+          SizedBox(
+            height: DeviceSize.height(context) / 40,
+          ),
+          horizontalList(context),
+
+          Container(
+            margin: EdgeInsets.all(10),
+            child: Text(
+              Strings.top_course,
+              style: AppTextStyles.blackButtonTextStyle,
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          // verticalList(context),
+        ],
       ),
     );
   }

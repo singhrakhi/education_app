@@ -55,6 +55,8 @@ class Strings {
   //home
   static const String home = 'Home';
   static const String search = 'Search';
+  static const String top_course = 'Top Courses in Business';
+
 
 
   //validator text
@@ -73,5 +75,17 @@ class Strings {
   //dialog messages
 
   static const String somethingWentWrong = "Something Went Wrong";
+
+
+//  icons
+
+static const String menuIcon = 'assets/images/menu.png';
+static const String homeIcon = 'assets/images/home.png';
+  static const String bookmarkIcon = 'assets/images/bookmark.png';
+  static const String notificationIcon = 'assets/images/notification.png';
+  static const String userIcon = 'assets/images/user.png';
+  static const String userFaceIcon = 'assets/images/user_face.png';
+
+
 
 }
