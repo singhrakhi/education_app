@@ -42,7 +42,7 @@ class ForgotPass extends StatelessWidget {
                  Align(
                    alignment: Alignment.topLeft,
                    child: Text(Strings.forgot_pass,
-                     style: AppTextStyles.blackButtonTextStyle,),
+                     style: AppTextStyles.blackButtonTextStyle(context),),
                  ),
 
                  SizedBox(

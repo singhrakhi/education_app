@@ -8,9 +8,10 @@ class Styles {
       return DeviceSize.width(context)/20; //changed from 27 to 20 asked by client
   }
 
-  static double hintTextSize(BuildContext context){
-      return DeviceSize.width(context)/24;
+  static double drawerHeadingFontSize(BuildContext context){
+    return DeviceSize.width(context)/22; //changed from 27 to 20 asked by client
   }
+
 
   static double labelTextSize(BuildContext context){
       return DeviceSize.width(context)/24;

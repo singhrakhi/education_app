@@ -1,5 +1,6 @@
 import 'package:education_app/core/res/styles.dart';
 import 'package:education_app/core/utils/constatnts.dart';
+import 'package:education_app/core/utils/device_size.dart';
 import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
@@ -28,17 +29,27 @@ class AppTextStyles {
       TextStyle(color: AppColors.lightOrange, fontSize: Constants.largeFontSize24, fontFamily: 'Poppins-Medium',
         fontWeight: FontWeight.w700,);
 
-  static TextStyle get blackButtonTextStyle =>
-      TextStyle(color: AppColors.black, fontSize: Constants.buttonFontSize20, fontFamily: 'Poppins-Regular',
-        fontWeight: FontWeight.w700,);
+  static TextStyle blackButtonTextStyle (BuildContext context){
+    return TextStyle(color: AppColors.black, fontSize: 20, fontFamily: 'Poppins-Regular',
+      fontWeight: FontWeight.w700,);
+  }
+
+
+  static TextStyle homeTextStyle (BuildContext context){
+  return TextStyle(color: AppColors.black, fontSize: DeviceSize.width(context)/20, fontFamily: 'Poppins-Regular',
+      fontWeight: FontWeight.w700,);
+  }
+
 
   static TextStyle get whiteButtonTextStyle =>
       TextStyle(color: AppColors.white, fontSize: Constants.fontSize18, fontFamily: 'Poppins-Regular',
         fontWeight: FontWeight.w700,);
 
-  static TextStyle get blackRegular16 =>
-      TextStyle(color: AppColors.black, fontSize: Constants.fontSize16, fontFamily: 'Poppins-Regular',
-        fontWeight: FontWeight.w700,);
+  static TextStyle blackRegular16 (BuildContext context){
+   return TextStyle(color: AppColors.black, fontSize: DeviceSize.width(context)/30, fontFamily: 'Poppins-Regular',
+      fontWeight: FontWeight.w700,);
+  }
+
   static TextStyle get blackRegular16Underline =>
       TextStyle(color: AppColors.black, fontSize: Constants.fontSize16, fontFamily: 'Poppins-Regular',
         fontWeight: FontWeight.w700,decoration: TextDecoration.underline);
@@ -51,13 +62,13 @@ class AppTextStyles {
       TextStyle( fontSize: Constants.buttonFontSize20, fontFamily: 'Poppins-Regular',
         fontWeight: FontWeight.w400,);
 
-  static TextStyle get primarBold16 =>
-      TextStyle(color: AppColors.darkPrimaryColor, fontSize: Constants.fontSize16, fontFamily: 'Poppins-Bold',
-        fontWeight: FontWeight.w700,);
+  static TextStyle primarBold16 (BuildContext context){
+    return TextStyle(color: AppColors.darkPrimaryColor, fontSize: DeviceSize.width(context)/26, fontFamily: 'Poppins-Bold',
+      fontWeight: FontWeight.w700,);
+  }
 
   static TextStyle medium20 (BuildContext context){
-    TextStyle(color: AppColors.black, fontSize: Styles.registrationPageHeaderSize(context),fontFamily: 'Poppins-Medium',
-      fontWeight: FontWeight.w400,);
+    TextStyle(color: AppColors.black, fontSize: DeviceSize.width(context)/22,fontFamily: 'Poppins-Bold',);
   }
 
   static TextStyle get normalFont17 =>
@@ -74,9 +85,10 @@ class AppTextStyles {
           fontWeight: FontWeight.w400);
 
 
-  static TextStyle get normalBoldFont12 =>
-      TextStyle(color: AppColors.black, fontSize: 12, fontFamily: 'Poppins-SemiBold',
-          fontWeight: FontWeight.w400);
+  static TextStyle normalBoldFont12 (BuildContext context){
+   return TextStyle(color: AppColors.black, fontSize: DeviceSize.width(context)/30, fontFamily: 'Poppins-SemiBold',
+        fontWeight: FontWeight.w400);
+  }
 
   static TextStyle get headingTextItalic30 =>
       TextStyle(color: AppColors.white, fontSize: 40, fontFamily: 'Poppins-Italic',

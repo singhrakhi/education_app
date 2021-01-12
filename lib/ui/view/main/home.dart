@@ -2,13 +2,18 @@ import 'package:education_app/core/res/app_colors.dart';
 import 'package:education_app/core/res/strings.dart';
 import 'package:education_app/core/res/styles.dart';
 import 'package:education_app/core/res/text_styles.dart';
+import 'package:education_app/core/utils/constatnts.dart';
 import 'package:education_app/core/utils/device_size.dart';
 import 'package:education_app/core/utils/responsive_ui.dart';
+import 'package:education_app/core/utils/widget.dart';
 import 'package:education_app/ui/shared/custom_appbar.dart';
+import 'package:education_app/ui/shared/home_view.dart';
+import 'package:education_app/ui/view/main/home_frag.dart';
 import 'package:education_app/ui/view/main/saved_frag.dart';
 import 'file:///D:/project/education_app/lib/ui/view/main/home_frag.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'home_frag.dart';
 
 import 'notification.dart';
 
@@ -21,9 +26,6 @@ class DrawerItem {
 }
 
 class Home extends StatefulWidget {
-
-
-
   final drawerItems = [
     new DrawerItem('My Course', Icons.arrow_forward, 'See all my courses'),
     new DrawerItem('My profile', Icons.arrow_forward, 'See my profile'),
@@ -38,7 +40,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   bool viewVisible = false;
   double _height;
   double _width;
@@ -51,9 +52,9 @@ class _HomeState extends State<Home> {
   _getDrawerItemWidget(int pos) {
     switch (pos) {
       case 0:
-        return new HomeFrag();
-      case 1:
-        return new SavedFrag();
+        return HomeView('Home');
+        case 1:
+        return SavedFrag('Saved');
       case 2:
         return new NotificationFrag();
 
@@ -80,72 +81,102 @@ class _HomeState extends State<Home> {
     _isLarge = ResponsiveWidget.isScreenLarge(_width, _pixel);
     _isMedium = ResponsiveWidget.isScreenMedium(_width, _pixel);
 
-    var drawerOptions = <Widget>[];
-    for (var i = 0; i < widget.drawerItems.length; i++) {
-      var d = widget.drawerItems[i];
-      drawerOptions.add(ListTile(
-        trailing: Icon(
-          d.icon,
-          color: AppColors.black,
-        ),
-        title: Text(
-          d.title,
-          style: AppTextStyles.blackRegular16,
-        ),
-        subtitle: Text(
-          d.subTitle,
-          style: AppTextStyles.normalLightFont14,
-        ),
-        selected: i == _selectedDrawerIndex,
-        onTap: () => _onSelectItem(i),
-      ));
-    }
-
     return Scaffold(
-        backgroundColor: AppColors.white,
-        body: _buildBody(),
-    );
-  }
+      backgroundColor: AppColors.white,
+      body: _buildBody(),
 
-
-  Widget _drawerItem({Function onPress, String title}) {
-    return MaterialButton(
-      minWidth: DeviceSize.width(context),
-      //color: Colors.red,
-      onPressed: onPress,
-      highlightColor: Colors.grey,
-      splashColor: Colors.grey,
-      focusColor: Colors.grey,
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: new Text(title,
-            style: TextStyle(
-              color: AppColors.black,
-              fontWeight: FontWeight.w300,
-              fontFamily: "Poppins-Regular",
-              fontSize: Styles.drawerItemsSize(context),
-            )),
-      ),
-    );
-  }
-
-
-  Widget _drawerView() {
-    return SafeArea(
-      child: Container(
-        height: DeviceSize.height(context),
-        width: DeviceSize.width(context),
-        child: Stack(
-          children: [
-            // _getDrawerItemWidget(_selectedDrawerIndex),
-            CustomAppBar.buildAppBarHome(context: context, title: Strings.home),
-
-            Positioned(
-                bottom: 0,
-                child:  bottomView()),
-          ],
-        ),
-      ),
+        // bottomNavigationBar: Container(
+        //   color: AppColors.white,
+        //   child: Container(
+        //     height: _height/12,
+        //
+        //       // decoration: BoxDecoration(
+        //       //   color: Colors.white,
+        //       //   borderRadius: BorderRadius.only(
+        //       //       topRight: Radius.circular(30), topLeft: Radius.circular(30)),
+        //       //   boxShadow: [
+        //       //     BoxShadow(
+        //       //         color: Colors.black12, spreadRadius: 0, blurRadius: 1),
+        //       //   ],
+        //       // ),
+        //
+        //       child:BottomNavigationBar(
+        //         items: <BottomNavigationBarItem>[
+        //           BottomNavigationBarItem(
+        //               icon: Icon(Icons.home, color: AppColors.primaryColor),
+        //               label: ''),
+        //           BottomNavigationBarItem(
+        //               icon:
+        //               Icon(Icons.bookmark, color: AppColors.primaryColor),
+        //               label: ''),
+        //           BottomNavigationBarItem(
+        //             icon: Stack(
+        //               children: [
+        //                 Container(
+        //                   width: 45,
+        //                   height: 45,
+        //                   decoration: new BoxDecoration(
+        //                     borderRadius:
+        //                     new BorderRadius.all(Radius.circular(15.0)),
+        //                     gradient: new LinearGradient(
+        //                       colors: [
+        //                         AppColors.orangeColor,
+        //                         AppColors.orangeDarkColor
+        //                       ],
+        //                     ),
+        //                     boxShadow: [
+        //                       BoxShadow(
+        //                         color:
+        //                         AppColors.lightOrange.withOpacity(0.25),
+        //                         spreadRadius: 2,
+        //                         blurRadius: 3,
+        //                         offset: Offset(
+        //                             5, 5), // changes position of shadow
+        //                       ),
+        //                     ],
+        //                   ),
+        //                   child: Center(
+        //                     child: Container(
+        //                         height: 20,
+        //                         width: 20,
+        //                         decoration: new BoxDecoration(
+        //                           borderRadius: new BorderRadius.all(
+        //                               Radius.circular(5.0)),
+        //                           gradient: new LinearGradient(
+        //                             colors: [
+        //                               AppColors.lightOrangeColor,
+        //                               AppColors.lightOrangeColor
+        //                             ],
+        //                           ),
+        //                         ),
+        //                         child: Icon(
+        //                           Icons.add,
+        //                           size: 10,
+        //                           color: AppColors.white,
+        //                         )),
+        //                   ),
+        //                 ),
+        //               ],
+        //             ),
+        //             label: '',
+        //           ),
+        //           BottomNavigationBarItem(
+        //               icon: Icon(
+        //                 Icons.notifications,
+        //                 color: AppColors.primaryColor,
+        //               ),
+        //               label: ''),
+        //           BottomNavigationBarItem(
+        //
+        //               icon: Icon(
+        //                 Icons.person,
+        //                 color: AppColors.primaryColor,
+        //               ),
+        //               label: ''),
+        //         ],
+        //       )
+        //   ),
+        // )
     );
   }
 
@@ -161,57 +192,117 @@ class _HomeState extends State<Home> {
     });
   }
 
+  Widget _drawerItem({Function onPress, String title, String subtitle}) {
+    return MaterialButton(
+      minWidth: DeviceSize.width(context),
+      //color: Colors.red,
+      onPressed: onPress,
+      highlightColor: Colors.grey,
+      splashColor: Colors.grey,
+      focusColor: Colors.grey,
+      child: Container(
+        padding: EdgeInsets.all(20),
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(title,
+                        style: TextStyle(
+                          color: AppColors.black,
+                          fontFamily: 'Poppins-Bold',
+                          fontSize: Styles.drawerHeadingFontSize(context),
+                        )),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(subtitle,
+                        style: TextStyle(
+                          color:Colors.black38,
+                          fontFamily: 'Poppins-light',
+                          fontSize: Styles.stepperLabelTextSize(context),
+                        )),
+                  ),
+                ],
+              ),
+              Icon(
+                title==Strings.drawerLogout?Icons.logout:Icons.arrow_forward_outlined,
+                color: AppColors.black,
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildBody() {
     return SafeArea(
       child: Container(
+        color: AppColors.bgColor.withOpacity(.1),
         height: DeviceSize.height(context),
         width: DeviceSize.width(context),
         child: Stack(
           children: [
-            // _getDrawerItemWidget(_selectedDrawerIndex),
-            Container(
-              height: _height/10,
-              width: _width,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.arrow_back_ios, color: AppColors.black,),
-                    onPressed:(){},
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      Strings.home,
-                      style: TextStyle(
+            Column(
+              children: [
+                Container(
+                  height: _height / 15,
+                  width: _width,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        icon: Icon(
+                          Icons.arrow_back_ios,
                           color: AppColors.black,
-                          fontSize: Styles.appBarFontSize(context),
-                          fontFamily: 'Poppins-Medium',
-                          fontWeight: FontWeight.w500),
-                    ),
-                  ),
-
-                  InkWell(
-                    onTap: showWidget,
-                    splashColor: AppColors.greyColor,
-                    child: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Image.asset(
-                        Strings.menuIcon,
-                        height: 30,
-                        width:30,
-                        color: AppColors.black,
+                        ),
+                        onPressed: () {},
                       ),
-                    ),
-
+                      Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          Strings.home,
+                          style: TextStyle(
+                              color: AppColors.black,
+                              fontSize: Styles.appBarFontSize(context),
+                              fontFamily: 'Poppins-Medium',
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: showWidget,
+                        splashColor: AppColors.greyColor,
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Image.asset(
+                            Strings.menuIcon,
+                            height: 30,
+                            width: 30,
+                            color: AppColors.black,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+
+                _getDrawerItemWidget(_selectedDrawerIndex),
+
+              ],
             ),
 
             Positioned(
               top: 10,
-              right: _width/7,
+              right: _width / 7,
               child: Visibility(
                 maintainSize: true,
                 maintainAnimation: true,
@@ -219,12 +310,12 @@ class _HomeState extends State<Home> {
                 visible: viewVisible,
                 child: Container(
                   padding: EdgeInsets.all(10),
-                  height: _height-_height/6 ,
+                  height: _height - _height / 7,
                   width: _width - _width / 5,
                   decoration: new BoxDecoration(
                     color: Colors.white,
                     borderRadius: new BorderRadius.only(
-                     topLeft: const Radius.circular(20.0),
+                      topLeft: const Radius.circular(20.0),
                       topRight: const Radius.circular(40.0),
                       bottomLeft: const Radius.circular(20.0),
                       bottomRight: const Radius.circular(40.0),
@@ -241,12 +332,13 @@ class _HomeState extends State<Home> {
                   child: Column(
                     children: <Widget>[
                       Container(
+
                         color: Colors.white,
                         height: _isLarge
                             ? _height / 3.7
                             : _isMedium
-                            ? _height / 3.7
-                            : _height / 3.5,
+                                ? _height / 3.7
+                                : _height / 3.5,
                         width: _width,
                         padding: EdgeInsets.only(
                             top: 10.0, left: 10, right: 10, bottom: 20),
@@ -262,71 +354,113 @@ class _HomeState extends State<Home> {
                                     size: DeviceSize.width(context) / 15,
                                   ),
                                 )),
-                            Column(
-                              children: [
-                                SizedBox(height: 20,),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
-                                  children: [
-                                    Container(
-                                      width: 70,
-                                      height: 70,
-                                      child: ClipRRect(
-                                        borderRadius: new BorderRadius.circular(10.0),
-                                        child: Container(
-                                          color: AppColors.greyColor,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(0.0),
-                                            child: Image.asset(
-                                              Strings.userFaceIcon,
-                                              fit: BoxFit.fill,
-                                            ),
-                                          )
+                            Padding(
+                              padding: const EdgeInsets.all(18.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Container(
+                                        width: _width / 6,
+                                        height: _width / 6,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              new BorderRadius.circular(10.0),
+                                          child: Container(
+                                              color: AppColors.greyColor,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(0.0),
+                                                child: Image.asset(
+                                                  Strings.userFaceIcon,
+                                                  fit: BoxFit.fill,
+                                                ),
+                                              )),
                                         ),
                                       ),
-                                    ),
-                                    Column(
-                                      children: [
-                                        Text('Alonzo A. Cain',style: TextStyle(
-                                            fontSize: Styles.registrationPageHeaderSize(context),
-                                            fontFamily: 'Poppins-Medium',
-                                            color: AppColors.black
-                                        ),),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Alonzo A. Cain',
+                                            style: TextStyle(
+                                                fontSize:
+                                                    Styles.drawerHeadingFontSize(
+                                                        context),
+                                                fontFamily: 'Poppins-Bold',
+                                                color: AppColors.black),
+                                          ),
+                                          Text(
+                                            'AlonzoACain@gmail.com',
+                                            style: TextStyle(
+                                                fontSize:
+                                                    Styles.smallTextSize(context),
+                                                fontFamily: 'Poppins-Bold',
+                                                color: AppColors.black
+                                                    .withOpacity(.7),
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                          Text(
+                                            'Phone - +91 93xxxxxxxx',
+                                            style: TextStyle(
+                                                fontSize:
+                                                    Styles.smallTextSize(context),
+                                                fontFamily: 'Poppins-Light',
+                                                color: AppColors.black
+                                                    .withOpacity(.6)),
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
 
-                                        Text('AlonzoACain@gmail.com',style: TextStyle(
-                                            fontSize: Styles.labelTextSize(context),
-                                            fontFamily: 'Poppins-Medium',
-                                          color: AppColors.black
-                                        ),),
-                                        Text('Phone - +91 9345545545',style: TextStyle(
-                                            fontSize: Styles.stepperLabelTextSize(context),
-                                            fontFamily: 'Poppins-Light',
-                                            color: AppColors.black.withOpacity(.6)
-                                        ),)
-                                      ],
-                                    )
+                                ],
+                              ),
+                            ),
 
-                                  ],
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
                           ],
                         ),
                       ),
+                      Column(
+                        children: [
+                          _drawerItem(
+                              onPress: () {},
+                              title: Strings.drawerCourse,
+                              subtitle: Strings.drawerCourseSub),
+                          _drawerItem(
+                              onPress: () {
+                                // Navigator.push(context, MaterialPageRoute(builder: (context)=>SavedFrag()));
+                              },
+                              title: Strings.drawerProfile,
+                              subtitle: Strings.drawerProfileSub),
+                          _drawerItem(
+                              onPress: () {},
+                              title: Strings.drawerCard,
+                              subtitle: Strings.drawerCardSub),
+                          _drawerItem(
+                              onPress: () {
 
+                              },
+                              title: Strings.drawerWish,
+                              subtitle: Strings.drawerWishSub),
+                          _drawerItem(
+                              onPress: () {}, title: Strings.drawerLogout,subtitle: ''),
+                        ],
+                      ),
                     ],
                   ),
                 ),
               ),
             ),
 
-           Positioned(
-             bottom: 0,
-             child:  bottomView()),
+            Positioned(bottom: 0, child: bottomView()),
           ],
         ),
       ),
@@ -337,23 +471,26 @@ class _HomeState extends State<Home> {
     return Container(
       padding: EdgeInsets.all(10),
       width: DeviceSize.width(context),
-      height: DeviceSize.height(context)/11,
+      height: DeviceSize.height(context) / 11,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
-            topRight: Radius.circular(30),
-            topLeft: Radius.circular(30)),
+            topRight: Radius.circular(30), topLeft: Radius.circular(30)),
         boxShadow: [
-          BoxShadow(
-              color: Colors.black12, spreadRadius: 0, blurRadius: 1),
+          BoxShadow(color: Colors.black12, spreadRadius: 0, blurRadius: 1),
         ],
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           InkWell(
-            onTap: (){
+            onTap: () {
               print('clicked home');
+              setState(() {
+                _selectedDrawerIndex=0;
+              });
+
+
             },
             splashColor: AppColors.greyColor,
             child: Padding(
@@ -367,8 +504,12 @@ class _HomeState extends State<Home> {
             ),
           ),
           InkWell(
-            onTap: (){
-              print('clicked home');
+            onTap: () {
+              print('clicked bookmark');
+              setState(() {
+                _selectedDrawerIndex=1;
+              });
+
             },
             splashColor: AppColors.greyColor,
             child: Padding(
@@ -381,10 +522,12 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
-
           InkWell(
-            onTap: (){
-              print('clicked home');
+            onTap: () {
+              print('clicked add');
+              setState(() {
+                _selectedDrawerIndex=2;
+              });
             },
             splashColor: AppColors.greyColor,
             child: Stack(
@@ -393,8 +536,7 @@ class _HomeState extends State<Home> {
                   width: 55,
                   height: 55,
                   decoration: new BoxDecoration(
-                    borderRadius:
-                    new BorderRadius.all(Radius.circular(15.0)),
+                    borderRadius: new BorderRadius.all(Radius.circular(15.0)),
                     gradient: new LinearGradient(
                       colors: [
                         AppColors.orangeColor,
@@ -403,12 +545,10 @@ class _HomeState extends State<Home> {
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color:
-                        AppColors.lightOrange.withOpacity(0.25),
+                        color: AppColors.lightOrange.withOpacity(0.25),
                         spreadRadius: 2,
                         blurRadius: 3,
-                        offset: Offset(
-                            5, 5), // changes position of shadow
+                        offset: Offset(5, 5), // changes position of shadow
                       ),
                     ],
                   ),
@@ -417,8 +557,8 @@ class _HomeState extends State<Home> {
                         height: 20,
                         width: 20,
                         decoration: new BoxDecoration(
-                          borderRadius: new BorderRadius.all(
-                              Radius.circular(5.0)),
+                          borderRadius:
+                              new BorderRadius.all(Radius.circular(5.0)),
                           gradient: new LinearGradient(
                             colors: [
                               AppColors.lightOrangeColor,
@@ -436,10 +576,12 @@ class _HomeState extends State<Home> {
               ],
             ),
           ),
-
           InkWell(
-            onTap: (){
-              print('clicked home');
+            onTap: () {
+              print('clicked notification');
+              setState(() {
+                _selectedDrawerIndex=3;
+              });
             },
             splashColor: AppColors.greyColor,
             child: Padding(
@@ -453,7 +595,12 @@ class _HomeState extends State<Home> {
             ),
           ),
           InkWell(
-            onTap: (){},
+            onTap: () {
+              setState(() {
+                _selectedDrawerIndex=4;
+              });
+              print('clicked profile');
+            },
             splashColor: AppColors.darkPrimaryColor,
             child: Padding(
               padding: const EdgeInsets.all(15.0),
@@ -469,5 +616,4 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-
 }

@@ -134,7 +134,7 @@ class _IntroScreenState extends State<IntroScreen> {
       ),
           Text(
             title,
-            style: AppTextStyles.blackButtonTextStyle,
+            style: AppTextStyles.blackButtonTextStyle(context),
             textAlign: TextAlign.center,
 
           ),

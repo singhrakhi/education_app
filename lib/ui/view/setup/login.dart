@@ -122,7 +122,7 @@ class _LoginState extends State<Login> {
                           Navigator.pushReplacementNamed(context, Constants.REGISTRATION);
                         },
                         child: Text(Strings.sign_up,
-                          style: AppTextStyles.primarBold16,),
+                          style: AppTextStyles.primarBold16(context),),
                       ),
                     ],
                   ),

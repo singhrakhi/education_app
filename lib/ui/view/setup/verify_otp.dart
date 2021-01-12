@@ -36,7 +36,7 @@ class VerifyOtp extends StatelessWidget {
                     alignment: Alignment.topLeft,
                     child: Text(
                       Strings.verify,
-                      style: AppTextStyles.blackButtonTextStyle,
+                      style: AppTextStyles.blackButtonTextStyle(context),
                     ),
                   ),
                   SizedBox(

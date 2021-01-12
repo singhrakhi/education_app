@@ -36,7 +36,7 @@ class CommonLogin extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top:20.0),
               child: Text(Strings.welcome,
-              style: AppTextStyles.blackButtonTextStyle,),
+              style: AppTextStyles.blackButtonTextStyle(context),),
             ),
             Text(Strings.com_desc,
               style: AppTextStyles.normalFont17,),
@@ -48,7 +48,7 @@ class CommonLogin extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(Strings.or,
-              style: AppTextStyles.blackButtonTextStyle,),
+              style: AppTextStyles.blackButtonTextStyle(context),),
             SizedBox(height: 20),
 
             buttonWidget(context, Strings.sign_up, AppColors.lightOrange, AppTextStyles.whiteButtonTextStyle, Signup())

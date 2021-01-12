@@ -163,7 +163,7 @@ class _SignupState extends State<Signup> {
                           Navigator.pushReplacementNamed(context, Constants.SIGN_IN);
                         },
                         child: Text(Strings.login_in,
-                          style: AppTextStyles.primarBold16,),
+                          style: AppTextStyles.primarBold16(context),),
                       ),
                     ],
                   ),

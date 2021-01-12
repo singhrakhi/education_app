@@ -1,5 +1,6 @@
 import 'package:education_app/core/utils/constatnts.dart';
 import 'package:education_app/ui/view/main/home.dart';
+import 'package:education_app/ui/view/main/profile.dart';
 import 'package:education_app/ui/view/setup/forgot.dart';
 import 'package:education_app/ui/view/setup/pass_success.dart';
 import 'package:education_app/ui/view/setup/verify_otp.dart';
@@ -40,6 +41,9 @@ class RouterApp {
         return MaterialPageRoute(
             builder: (BuildContext context) => Home());
 
+      case Constants.PROFILE:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => MyProfile());
 
       // case Constants.ResetPassword:
       //   String argument = settings.arguments;

@@ -58,6 +58,10 @@ class Strings {
   static const String top_course = 'Top Courses in Business';
 
 
+  // home view
+  static const String home_any = 'Business analysis \nfundamentals ';
+  static const String home_top_course = "USD: '\$'35.00";
+
 
   //validator text
   static const String nameRequired = "Name is Required.";
@@ -77,6 +81,17 @@ class Strings {
   static const String somethingWentWrong = "Something Went Wrong";
 
 
+//   drawer
+  static const String drawerCourse = 'My Course';
+  static const String drawerCourseSub = 'See all my Course';
+  static const String drawerProfile = 'My profile';
+  static const String drawerProfileSub = 'See my profile';
+  static const String drawerCard = 'Payment card';
+  static const String drawerCardSub = 'Set or add your payment card ';
+  static const String drawerWish = 'Wishlist';
+  static const String drawerWishSub = 'See all cart items';
+  static const String drawerLogout = 'Logout';
+
 //  icons
 
 static const String menuIcon = 'assets/images/menu.png';
@@ -85,6 +100,8 @@ static const String homeIcon = 'assets/images/home.png';
   static const String notificationIcon = 'assets/images/notification.png';
   static const String userIcon = 'assets/images/user.png';
   static const String userFaceIcon = 'assets/images/user_face.png';
+  static const String login_img = 'assets/images/login.png';
+  static const String ratingIcon =  'assets/images/rating.png';
 
 
 

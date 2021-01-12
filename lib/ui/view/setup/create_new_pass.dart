@@ -36,7 +36,7 @@ class CreateNewPass extends StatelessWidget {
                     alignment: Alignment.topLeft,
                     child: Text(
                       Strings.create_new,
-                      style: AppTextStyles.blackButtonTextStyle,
+                      style: AppTextStyles.blackButtonTextStyle(context),
                     ),
                   ),
                   SizedBox(

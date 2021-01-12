@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 
-class SavedFrag extends StatelessWidget {
+class SavedFrag extends StatefulWidget {
+  SavedFrag(this.hintText);
+
+  String hintText;
+
+  @override
+  _SavedFragState createState() => _SavedFragState();
+}
+
+class _SavedFragState extends State<SavedFrag> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Saved Fragme'),
-      ),
+    return Container(
+
     );
   }
 }
