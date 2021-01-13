@@ -12,7 +12,6 @@ class Styles {
     return DeviceSize.width(context)/22; //changed from 27 to 20 asked by client
   }
 
-
   static double labelTextSize(BuildContext context){
       return DeviceSize.width(context)/24;
   }

@@ -7,14 +7,13 @@ import 'package:education_app/core/utils/device_size.dart';
 import 'package:education_app/core/utils/responsive_ui.dart';
 import 'package:education_app/core/utils/widget.dart';
 import 'package:education_app/ui/shared/custom_appbar.dart';
-import 'package:education_app/ui/shared/home_view.dart';
-import 'package:education_app/ui/view/main/home_frag.dart';
+import 'package:education_app/ui/view/main/my_courses.dart';
+import 'file:///D:/project/education_app/lib/ui/view/main/home_view.dart';
+import 'package:education_app/ui/view/main/profile.dart';
 import 'package:education_app/ui/view/main/saved_frag.dart';
-import 'file:///D:/project/education_app/lib/ui/view/main/home_frag.dart';
+import 'package:education_app/ui/view/main/user_profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'home_frag.dart';
-
 import 'notification.dart';
 
 class DrawerItem {
@@ -48,28 +47,34 @@ class _HomeState extends State<Home> {
   bool _orientation;
   bool _isMedium;
   int _selectedDrawerIndex = 0;
+  var title = Strings.home;
 
   _getDrawerItemWidget(int pos) {
     switch (pos) {
       case 0:
+        title= Strings.home;
         return HomeView('Home');
         case 1:
+          title= Strings.drawerWish;
         return SavedFrag('Saved');
       case 2:
+        title= Strings.drawerCourse;
+        return new MyCourses();
+
+      case 3:
+        title= Strings.notification;
         return new NotificationFrag();
+      case 4:
+        title= Strings.profile;
+        return new UserProfile();
+
+      case 6:
+        title= Strings.drawerCourse;
+        return new MyCourses();
 
       default:
         return new Text("Error");
     }
-  }
-
-  _onSelectItem(int index) {
-    setState(() => _selectedDrawerIndex = index);
-    Navigator.of(context).pop(); // close the drawer
-  }
-
-  void _closeEndDrawer() {
-    Navigator.of(context).pop();
   }
 
   @override
@@ -247,7 +252,7 @@ class _HomeState extends State<Home> {
   Widget _buildBody() {
     return SafeArea(
       child: Container(
-        color: AppColors.bgColor.withOpacity(.1),
+        color: Colors.white54,
         height: DeviceSize.height(context),
         width: DeviceSize.width(context),
         child: Stack(
@@ -270,7 +275,7 @@ class _HomeState extends State<Home> {
                       Container(
                         alignment: Alignment.center,
                         child: Text(
-                          Strings.home,
+                         title,
                           style: TextStyle(
                               color: AppColors.black,
                               fontSize: Styles.appBarFontSize(context),
@@ -431,12 +436,20 @@ class _HomeState extends State<Home> {
                       Column(
                         children: [
                           _drawerItem(
-                              onPress: () {},
+                              onPress: () {
+                                title= Strings.drawerCourse;
+
+                                hideWidget();
+                                _selectedDrawerIndex=6;
+                              },
                               title: Strings.drawerCourse,
                               subtitle: Strings.drawerCourseSub),
                           _drawerItem(
                               onPress: () {
-                                // Navigator.push(context, MaterialPageRoute(builder: (context)=>SavedFrag()));
+                                title= Strings.drawerProfile;
+
+                                hideWidget();
+                                _selectedDrawerIndex=4;
                               },
                               title: Strings.drawerProfile,
                               subtitle: Strings.drawerProfileSub),
@@ -446,7 +459,10 @@ class _HomeState extends State<Home> {
                               subtitle: Strings.drawerCardSub),
                           _drawerItem(
                               onPress: () {
+                                title= Strings.drawerWish;
 
+                                hideWidget();
+                                _selectedDrawerIndex=1;
                               },
                               title: Strings.drawerWish,
                               subtitle: Strings.drawerWishSub),

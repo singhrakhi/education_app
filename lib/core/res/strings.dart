@@ -56,11 +56,24 @@ class Strings {
   static const String home = 'Home';
   static const String search = 'Search';
   static const String top_course = 'Top Courses in Business';
-
-
-  // home view
   static const String home_any = 'Business analysis \nfundamentals ';
   static const String home_top_course = "USD: '\$'35.00";
+
+  //wish list
+  static const String startup = 'Startup';
+
+  // course
+
+  static const String courseHeading = 'Digital Marketing Masterclass';
+  static const String courseContent = 'Course Content';
+  static const String more = 'More';
+  static const String share = 'Share this course';
+  static const String qa = 'Q&A';
+  static const String resources = 'Resources';
+  static const String category = 'Category';
+
+
+
 
 
   //validator text
@@ -92,6 +105,17 @@ class Strings {
   static const String drawerWishSub = 'See all cart items';
   static const String drawerLogout = 'Logout';
 
+  static const String notification = 'Notification';
+  static const String profile = 'Profile';
+
+
+//  user profile
+  static const String setting = 'Settings';
+  static const String account_sec = 'Account security';
+  static const String download = 'Download option';
+  static const String learning_reminder = 'Learning reminders';
+
+
 //  icons
 
 static const String menuIcon = 'assets/images/menu.png';
@@ -102,6 +126,18 @@ static const String homeIcon = 'assets/images/home.png';
   static const String userFaceIcon = 'assets/images/user_face.png';
   static const String login_img = 'assets/images/login.png';
   static const String ratingIcon =  'assets/images/rating.png';
+  static const String settingIcon =  'assets/images/setting.png';
+  static const String verifiedIcon =  'assets/images/verified.png';
+  static const String clockIcon =  'assets/images/clock.png';
+  static const String down_arrowIcon =  'assets/images/down_arrow.png';
+  static const String editIcon =  'assets/images/edit.png';
+  static const String premiumIcon =  'assets/images/premium.png';
+  static const String myCourseImg =  'assets/images/f1.png';
+  static const String menuNImg =  'assets/images/menu_n.png';
+  static const String commentImg =  'assets/images/comment.png';
+  static const String categIcon =  'assets/images/categ.png';
+
+
 
 
 

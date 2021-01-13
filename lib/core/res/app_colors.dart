@@ -22,6 +22,11 @@ class AppColors {
   static Color get orangeDarkColor => HexColor('#FD7239');
   static Color get lightOrangeColor => HexColor('#FDB988');
   static Color get darkGreyColor => HexColor('#D5D2FD');
+  static Color get purpleColor => HexColor('#A9A2FC');
+  static Color get blueColor => HexColor('#11BEEA');
+  static Color get blueLightColor => HexColor('#A6F3F8');
+
+
 
 
 

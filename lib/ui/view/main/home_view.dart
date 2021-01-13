@@ -3,32 +3,38 @@ import 'package:education_app/core/res/strings.dart';
 import 'package:education_app/core/res/text_styles.dart';
 import 'package:education_app/core/utils/device_size.dart';
 import 'package:education_app/core/utils/widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-class SavedFrag extends StatefulWidget {
-  SavedFrag(this.hintText);
+class HomeView extends StatefulWidget {
+  HomeView(this.hintText);
 
   String hintText;
 
   @override
-  _SavedFragState createState() => _SavedFragState();
+  _HomeViewState createState() => _HomeViewState();
 }
 
-class _SavedFragState extends State<SavedFrag> {
-  var _width;
+class _HomeViewState extends State<HomeView> {
+
   var _height;
+  var _width;
+
   @override
   Widget build(BuildContext context) {
-    _width = DeviceSize.width(context);
+
     _height = DeviceSize.height(context);
+    _width = DeviceSize.width(context);
 
     return SingleChildScrollView(
-      child:Container(
+      child:  Container(
         color: AppColors.bgColor.withOpacity(.03),
-        child:  Column(
+
+        child: Column(
           children: [
             Container(
-              height: _height / 13,
+              height: DeviceSize.height(context) / 13,
               margin: EdgeInsets.all( _height/35),
               decoration: new BoxDecoration(
                   color: Colors.white,
@@ -46,22 +52,34 @@ class _SavedFragState extends State<SavedFrag> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      Strings.startup,
+                      Strings.search,
                       style: AppTextStyles.medium20(context),
                     ),
-                    customRoundButton(Icons.close, context),
+                    customRoundButton(Icons.search, context),
                   ],
                 ),
               ),
             ),
 
-            Container(
-              height: _height/1.5,
-              margin: EdgeInsets.only(bottom: _height/20),
-              child: verticalList(context),
-            )
-          ],
+            horizontalList(context),
 
+            Container(
+              width: _width,
+              margin: EdgeInsets.all(10),
+              child: Text(
+                Strings.top_course,
+                textAlign: TextAlign.left,
+                style: AppTextStyles.homeTextStyle(context),
+              ),
+            ),
+
+           Container(
+             height: _height/4,
+             margin: EdgeInsets.only(bottom: _height/20),
+             child: verticalList(context),
+           )
+
+          ],
         ),
       ),
     );

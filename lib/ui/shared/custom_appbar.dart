@@ -28,27 +28,10 @@ class CustomAppBar{
             child: Text(
               title,
               style: TextStyle(
-                  color: Colors.white,
+                  color: AppColors.black,
                   fontSize: Styles.appBarFontSize(context),
                   fontFamily: 'Poppins-Medium',
                   fontWeight: FontWeight.w500),
-            ),
-          ),
-
-          Positioned(
-            right: 0,
-            width: DeviceSize.width(context)/8,
-            height: DeviceSize.height(context) / 13,
-            child: InkWell(
-              onTap: (){
-                Navigator.of(context).pop();
-              },
-              splashColor: AppColors.darkPrimaryColor,
-              child: Image.asset(
-                'assets/images/menu.png',
-                fit: BoxFit.fill,
-              ),
-
             ),
           ),
         ],

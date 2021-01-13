@@ -2,9 +2,11 @@ import 'dart:ffi';
 
 import 'package:education_app/core/res/app_colors.dart';
 import 'package:education_app/core/res/strings.dart';
+import 'package:education_app/core/res/styles.dart';
 import 'package:education_app/core/res/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'constatnts.dart';
+import 'package:education_app/ui/shared/custom_button.dart';
 import 'device_size.dart';
 
 Widget buttonWidget(BuildContext context, String name, Color color,
@@ -42,32 +44,69 @@ Widget buttonWidget(BuildContext context, String name, Color color,
   );
 }
 
-Widget customRoundButton(IconData icon, BuildContext context) {
-  return ClipOval(
-    child: Container(
-      height: DeviceSize.height(context) / 20,
-      width: DeviceSize.height(context) / 20,
-      decoration: BoxDecoration(
-        gradient: new LinearGradient(
-          colors: [AppColors.orangeColor, AppColors.orangeDarkColor],
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.lightOrange,
-            spreadRadius: 2,
-            blurRadius: 3,
-            offset: Offset(5, 5), // changes position of shadow
+Widget customRoundButton(IconData icon, BuildContext context,{Function onPress}) {
+  return InkWell(
+
+    onTap: onPress,
+    child: ClipOval(
+      child: Container(
+        height: DeviceSize.height(context) / 20,
+        width: DeviceSize.height(context) / 20,
+        decoration: BoxDecoration(
+          gradient: new LinearGradient(
+            colors: [AppColors.orangeColor, AppColors.orangeDarkColor],
           ),
-        ],
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.lightOrange,
+              spreadRadius: 2,
+              blurRadius: 3,
+              offset: Offset(5, 5), // changes position of shadow
+            ),
+          ],
+        ),
+        child: Center(
+            child: Icon(
+          icon,
+          color: AppColors.white,
+        )),
       ),
-      child: Center(
-          child: Icon(
-        icon,
-        color: AppColors.white,
-      )),
     ),
   );
 }
+
+Widget customRoundedView(double mWidth,BuildContext mContext, String text,
+    IconData icon, Color color){
+  return  Container(
+    width: mWidth / 6,
+    height: mWidth / 6,
+
+    decoration: new BoxDecoration(
+        color: color,
+        borderRadius: new BorderRadius.all(
+          Radius.circular(mWidth/20),
+        )),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          icon, color: Colors.white,size: 25,
+        ),
+
+        Text(
+          text,
+          style: TextStyle(
+            fontSize: Styles.labelTextSize(mContext),
+            fontFamily: 'Poppins-Regular',
+            color: AppColors.white,
+          ),
+        ),
+      ],
+    ),
+
+  );
+}
+
 
 Widget customButtonIcon(BuildContext context, Color color) {
   return Container(
@@ -325,3 +364,234 @@ Widget horizontalList(BuildContext context) {
         ],
       ));
 }
+
+Widget verticalList(BuildContext context){
+  var _height = DeviceSize.height(context);
+  var _width = DeviceSize.width(context);
+
+  return ListView.builder(
+
+    scrollDirection: Axis.vertical,
+    shrinkWrap: true,
+    itemCount: 5,
+    itemBuilder:(BuildContext context, int i){
+      return  Container(
+        height: _height/7,
+        margin: EdgeInsets.only(left: 10,right: 10,bottom: 5),
+        decoration: new BoxDecoration(
+            color: Colors.white,
+            borderRadius: new BorderRadius.all(Radius.circular(10),
+            )
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                width: _width / 3,
+                height: _width / 5,
+
+                child: ClipRRect(
+                  borderRadius:
+                  new BorderRadius.circular(10.0),
+                  child: Container(
+                      color: AppColors.greyColor,
+                      child: Padding(
+                        padding:
+                        const EdgeInsets.all(0.0),
+                        child: Image.asset(
+                          Strings.login_img,
+                          fit: BoxFit.fill,
+                        ),
+                      )),
+                ),
+
+              ),
+
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(Strings.home_any,
+                          style: AppTextStyles.blackRegular16(context),),
+                      ),
+
+                      Row(
+                        children: [
+
+                          Container(
+                            height: _width / 25,
+                            width: _width / 25,
+                            child: Image.asset(
+                              Strings.ratingIcon,
+                              fit: BoxFit.fill,
+                              color: AppColors.orangeColor,
+                            ),
+                          ),
+                          Container(
+                            height: _width / 25,
+                            width: _width / 25,
+                            child: Image.asset(
+                              Strings.ratingIcon,
+                              fit: BoxFit.fill,
+                              color: AppColors.orangeColor,
+                            ),
+                          ),
+                          Container(
+                            height: _width / 25,
+                            width: _width / 25,
+                            child: Image.asset(
+                              Strings.ratingIcon,
+                              fit: BoxFit.fill,
+                              color: AppColors.orangeColor,
+                            ),
+                          ),
+                          Container(
+                            height: _width / 25,
+                            width: _width / 25,
+                            child: Image.asset(
+                              Strings.ratingIcon,
+                              fit: BoxFit.fill,
+                              color: AppColors.orangeColor,
+                            ),
+                          ),
+                          Container(
+                            height: _width / 25,
+                            width: _width / 25,
+                            child: Image.asset(
+                              Strings.ratingIcon,
+                              fit: BoxFit.fill,
+                              color: AppColors.greyColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(Strings.home_top_course,
+                          style: AppTextStyles.normalBoldFont12(context),),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+
+              Container(
+                  alignment: Alignment.bottomCenter,
+                  child: customRoundButton(
+                      Icons.arrow_forward_ios, context)),
+
+            ],
+          ),
+        ),
+      );
+    } ,
+
+  );
+}
+
+Widget profileItem(BuildContext context,{Function onPress, String title, String subtitle,
+var buttonColor, var assetIcon,var iconColor, var icon }) {
+
+  var _width = DeviceSize.width(context);
+
+  return MaterialButton(
+    //color: Colors.red,
+    onPressed: onPress,
+    highlightColor: Colors.grey,
+    splashColor: Colors.grey,
+    focusColor: Colors.grey,
+
+    child: Container(
+      width: DeviceSize.width(context),
+      padding: EdgeInsets.all(10),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+
+            CustomButton(myHeight: _width/10,myWidth: _width/10,
+              buttonColor: buttonColor.withOpacity(.2),
+              assetIcon:assetIcon,iconColor: iconColor,
+              radius: _width/40,icon: icon,),
+
+            Expanded(child:Padding(padding: EdgeInsets.all(_width/30),
+              child:
+              Text(title,
+                  style: TextStyle(
+                    color: AppColors.black,
+                    fontFamily: 'Poppins-Regular',
+                    fontWeight: FontWeight.w600,
+                    fontSize: Styles.drawerHeadingFontSize(context),
+                  )
+              ),
+            ),
+            ),
+
+
+            if(title!=Strings.setting && title!=Strings.share && title!=Strings.qa && title!=Strings.resources && title!=Strings.category)
+            Icon(Icons.arrow_forward_outlined,color: AppColors.black,)
+
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+
+Widget myCourseContent(BuildContext context,var _height, _width){
+  return ListView.builder(
+
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
+      itemCount: 5,
+      itemBuilder:(BuildContext context, int i){
+        return Container(
+          height: _height/10,
+          margin: EdgeInsets.only(bottom: _width/25),
+          padding: EdgeInsets.only( left: _width/15),
+          decoration: new BoxDecoration(
+            color: Colors.white,
+            borderRadius: new BorderRadius.all(Radius.circular(10),
+            ),
+          ),
+          child: Row(
+            children: [
+              customRoundButton(Icons.play_arrow_outlined, context),
+
+              Padding(
+                padding:  EdgeInsets.all(_width/20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Introduction',
+                      style: AppTextStyles.normalBoldFont12(context),),
+                    Text('2.50 min',
+                      textAlign: TextAlign.left,
+                      style: AppTextStyles.normalLight(context),),
+
+                  ],
+                ),
+              ),
+
+              Expanded(
+                child: Container(
+                    margin: EdgeInsets.only(left: _width/5),
+                    child: Icon(Icons.arrow_forward_ios,color: Colors.black,)),
+              )
+
+            ],
+          ),
+        );
+      }
+  );
+}
+
