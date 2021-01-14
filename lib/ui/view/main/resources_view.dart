@@ -5,21 +5,19 @@ import 'package:education_app/core/utils/widget.dart';
 import 'package:education_app/ui/shared/custom_appbar.dart';
 import 'package:flutter/material.dart';
 
-
-class CategoryView extends StatefulWidget {
+class ResourcesView extends StatefulWidget {
   @override
-  _CategoryViewState createState() => _CategoryViewState();
+  _ResourcesViewState createState() => _ResourcesViewState();
 }
 
-class _CategoryViewState extends State<CategoryView> {
-
+class _ResourcesViewState extends State<ResourcesView> {
   double _height;
   double _width;
   List<CategoryModel> categoryList = [];
   bool subscription = false;
-  var courseName = ['Business','Finance',' Development','Social Media','Social Media'];
-  var icon = [Strings.analyticsIcon,Strings.moneyIcon,Strings.controlsIcon,Strings.thumbsIcon,Strings.thumbsIcon];
-  var totalCourse = ['122 Courses','453 Courses','888 Courses' ,'821 Courses','231 Courses','231 Courses'];
+  var courseName = ['Lecture 01','Lecture 11',' Lecture 12','Lecture 10','Lecture 05','Lecture 11',' Lecture 12','Lecture 10','Lecture 05'];
+  var icon = [Strings.analyticsIcon,Strings.moneyIcon,Strings.controlsIcon,Strings.thumbsIcon,Strings.thumbsIcon,Strings.moneyIcon,Strings.controlsIcon,Strings.thumbsIcon,Strings.thumbsIcon];
+  var totalCourse = ['2.3 MB','1.3 MB','6.3 MB' ,'7.6 MB','4.4 MB','4.3 MB','1.3 MB','6.3 MB' ,'7.6 MB','4.4 MB','4.3 MB'];
 
   getCategoryList(){
 
@@ -40,10 +38,12 @@ class _CategoryViewState extends State<CategoryView> {
     super.initState();
 
     getCategoryList();
+
   }
 
   @override
   Widget build(BuildContext context) {
+
     _height = DeviceSize.height(context);
     _width = DeviceSize.width(context);
 
@@ -51,7 +51,7 @@ class _CategoryViewState extends State<CategoryView> {
       body: SafeArea(
         child: Column(
           children: [
-            CustomAppBar.buildAppBar(context: context,title: 'Categories'),
+            CustomAppBar.buildAppBar(context: context,title: 'Resources'),
 
             courseContent()
           ],
@@ -60,13 +60,17 @@ class _CategoryViewState extends State<CategoryView> {
     );
   }
 
+
+
   Widget courseContent() {
 
     print(categoryList.length);
     return Container(
       padding: EdgeInsets.only(left: _width/15,right: _width/15),
       height: _height/1.2 ,
-      child: myContent(context, _height, _width,categoryList),
+      child: myResourcesContent(context, _height, _width,categoryList),
     );
   }
+
 }
+

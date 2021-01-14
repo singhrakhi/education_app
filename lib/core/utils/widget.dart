@@ -1,9 +1,14 @@
 import 'dart:ffi';
 
+import 'package:education_app/core/model/QAModel.dart';
+import 'package:education_app/core/model/category_model.dart';
+import 'package:education_app/core/model/course_content_model.dart';
+import 'package:education_app/core/model/course_model.dart';
 import 'package:education_app/core/res/app_colors.dart';
 import 'package:education_app/core/res/strings.dart';
 import 'package:education_app/core/res/styles.dart';
 import 'package:education_app/core/res/text_styles.dart';
+import 'package:education_app/ui/view/main/profile.dart';
 import 'package:flutter/material.dart';
 import 'constatnts.dart';
 import 'package:education_app/ui/shared/custom_button.dart';
@@ -44,7 +49,10 @@ Widget buttonWidget(BuildContext context, String name, Color color,
   );
 }
 
-Widget customRoundButton(IconData icon, BuildContext context,{Function onPress}) {
+Widget customRoundButton( BuildContext context,{Function onPress, String assetIcon,IconData icon}) {
+
+  var _height= DeviceSize.height(context) ;
+  var _width= DeviceSize.height(context);
   return InkWell(
 
     onTap: onPress,
@@ -66,10 +74,19 @@ Widget customRoundButton(IconData icon, BuildContext context,{Function onPress})
           ],
         ),
         child: Center(
-            child: Icon(
-          icon,
-          color: AppColors.white,
-        )),
+            child: icon!=null?Icon(
+              icon,
+              color: AppColors.white,
+            ): Container(
+              height: _width / 15,
+              width: _width / 15,
+              padding: EdgeInsets.all(3),
+              child: Image.asset(
+                assetIcon,
+                fit: BoxFit.fill,
+              ),
+            )
+        ),
       ),
     ),
   );
@@ -355,7 +372,7 @@ Widget horizontalList(BuildContext context) {
                         width: DeviceSize.width(context) / 1.7,
                         alignment: Alignment.bottomCenter,
                         child: customRoundButton(
-                            Icons.arrow_forward_ios, context)),
+                          context,icon: Icons.arrow_forward_ios, )),
                   ),
                 ],
               ),
@@ -365,128 +382,139 @@ Widget horizontalList(BuildContext context) {
       ));
 }
 
-Widget verticalList(BuildContext context){
+Widget verticalList(BuildContext context, List<MyCourseModel> _myList,{Function onPress}){
   var _height = DeviceSize.height(context);
   var _width = DeviceSize.width(context);
+
+  print(_myList.length);
 
   return ListView.builder(
 
     scrollDirection: Axis.vertical,
     shrinkWrap: true,
-    itemCount: 5,
+    itemCount: _myList.length,
     itemBuilder:(BuildContext context, int i){
-      return  Container(
-        height: _height/7,
-        margin: EdgeInsets.only(left: 10,right: 10,bottom: 5),
-        decoration: new BoxDecoration(
-            color: Colors.white,
-            borderRadius: new BorderRadius.all(Radius.circular(10),
-            )
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Container(
-                width: _width / 3,
-                height: _width / 5,
+      return InkWell(
+        onTap: (){
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MyProfile()),
+          );
+        },
+        splashColor: AppColors.greyColor,
+        child: Container(
+          height: _height/7,
+          margin: EdgeInsets.only(left: 10,right: 10,bottom: 5),
+          decoration: new BoxDecoration(
+              color: Colors.white,
+              borderRadius: new BorderRadius.all(Radius.circular(10),
+              )
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  width: _width / 3,
+                  height: _width / 5,
 
-                child: ClipRRect(
-                  borderRadius:
-                  new BorderRadius.circular(10.0),
-                  child: Container(
-                      color: AppColors.greyColor,
-                      child: Padding(
-                        padding:
-                        const EdgeInsets.all(0.0),
-                        child: Image.asset(
-                          Strings.login_img,
-                          fit: BoxFit.fill,
-                        ),
-                      )),
+                  child: ClipRRect(
+                    borderRadius:
+                    new BorderRadius.circular(10.0),
+                    child: Container(
+                        color: AppColors.greyColor,
+                        child: Padding(
+                          padding:
+                          const EdgeInsets.all(0.0),
+                          child: Image.asset(
+                            _myList[i].img,
+                            fit: BoxFit.fill,
+                          ),
+                        )),
+                  ),
+
                 ),
 
-              ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(_myList[i].courseName,
+                            style: AppTextStyles.blackRegular16(context),),
+                        ),
 
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(Strings.home_any,
-                          style: AppTextStyles.blackRegular16(context),),
-                      ),
+                        Row(
+                          children: [
 
-                      Row(
-                        children: [
-
-                          Container(
-                            height: _width / 25,
-                            width: _width / 25,
-                            child: Image.asset(
-                              Strings.ratingIcon,
-                              fit: BoxFit.fill,
-                              color: AppColors.orangeColor,
+                            Container(
+                              height: _width / 25,
+                              width: _width / 25,
+                              child: Image.asset(
+                                Strings.ratingIcon,
+                                fit: BoxFit.fill,
+                                color: AppColors.orangeColor,
+                              ),
                             ),
-                          ),
-                          Container(
-                            height: _width / 25,
-                            width: _width / 25,
-                            child: Image.asset(
-                              Strings.ratingIcon,
-                              fit: BoxFit.fill,
-                              color: AppColors.orangeColor,
+                            Container(
+                              height: _width / 25,
+                              width: _width / 25,
+                              child: Image.asset(
+                                Strings.ratingIcon,
+                                fit: BoxFit.fill,
+                                color: AppColors.orangeColor,
+                              ),
                             ),
-                          ),
-                          Container(
-                            height: _width / 25,
-                            width: _width / 25,
-                            child: Image.asset(
-                              Strings.ratingIcon,
-                              fit: BoxFit.fill,
-                              color: AppColors.orangeColor,
+                            Container(
+                              height: _width / 25,
+                              width: _width / 25,
+                              child: Image.asset(
+                                Strings.ratingIcon,
+                                fit: BoxFit.fill,
+                                color: AppColors.orangeColor,
+                              ),
                             ),
-                          ),
-                          Container(
-                            height: _width / 25,
-                            width: _width / 25,
-                            child: Image.asset(
-                              Strings.ratingIcon,
-                              fit: BoxFit.fill,
-                              color: AppColors.orangeColor,
+                            Container(
+                              height: _width / 25,
+                              width: _width / 25,
+                              child: Image.asset(
+                                Strings.ratingIcon,
+                                fit: BoxFit.fill,
+                                color: AppColors.orangeColor,
+                              ),
                             ),
-                          ),
-                          Container(
-                            height: _width / 25,
-                            width: _width / 25,
-                            child: Image.asset(
-                              Strings.ratingIcon,
-                              fit: BoxFit.fill,
-                              color: AppColors.greyColor,
+                            Container(
+                              height: _width / 25,
+                              width: _width / 25,
+                              child: Image.asset(
+                                Strings.ratingIcon,
+                                fit: BoxFit.fill,
+                                color: AppColors.greyColor,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(Strings.home_top_course,
-                          style: AppTextStyles.normalBoldFont12(context),),
-                      )
-                    ],
+                          ],
+                        ),
+                        Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(_myList[i].price,
+                            style: AppTextStyles.normalBoldFont12(context),),
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
 
-              Container(
-                  alignment: Alignment.bottomCenter,
-                  child: customRoundButton(
-                      Icons.arrow_forward_ios, context)),
+                Container(
+                    alignment: Alignment.bottomCenter,
+                    child: customRoundButton(
+                      context,icon:  Icons.arrow_forward_ios )),
 
-            ],
+              ],
+            ),
           ),
         ),
       );
@@ -546,12 +574,12 @@ var buttonColor, var assetIcon,var iconColor, var icon }) {
 }
 
 
-Widget myCourseContent(BuildContext context,var _height, _width){
+Widget myCourseContent(BuildContext context,var _height, _width,  List<CourseContentModel> _list){
   return ListView.builder(
 
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
-      itemCount: 5,
+      itemCount: _list.length,
       itemBuilder:(BuildContext context, int i){
         return Container(
           height: _height/10,
@@ -562,22 +590,81 @@ Widget myCourseContent(BuildContext context,var _height, _width){
             borderRadius: new BorderRadius.all(Radius.circular(10),
             ),
           ),
+          child: Stack(
+            children: [
+              Row(
+                children: [
+                  customRoundButton( context,icon: Icons.play_arrow_outlined),
+
+                  Padding(
+                    padding:  EdgeInsets.all(_width/20),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(_list[i].heading,
+                          style: AppTextStyles.normalBoldFont12(context),),
+                        Text(_list[i].duration,
+                          textAlign: TextAlign.left,
+                          style: AppTextStyles.normalLight(context),),
+
+                      ],
+                    ),
+                  ),
+
+
+                ],
+              ),
+              Positioned(
+                right: 5,
+                top: _height/30,
+                child:  Container(
+                  margin: EdgeInsets.only(left: _width/5),
+                  child: Icon(Icons.arrow_forward_ios,color: Colors.black,)),
+              )
+            ],
+          ),
+        );
+      }
+  );
+}
+
+
+Widget myContent(BuildContext context,var _height, _width, List<CategoryModel> model){
+  return ListView.builder(
+
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
+      itemCount: model.length,
+      itemBuilder:(BuildContext context, int i){
+        return Container(
+          height: _height/11.5,
+          margin: EdgeInsets.only(bottom: _width/25),
+          padding: EdgeInsets.only( left: _width/15),
+          decoration: new BoxDecoration(
+            color:  i==0?AppColors.white:AppColors.greyColor,
+            borderRadius: new BorderRadius.all(Radius.circular(_width/35),
+            ),
+          ),
           child: Row(
             children: [
-              customRoundButton(Icons.play_arrow_outlined, context),
+
+              CustomButton(myHeight: _width/10,myWidth: _width/10,
+                buttonColor: i==0?AppColors.orangeColor:AppColors.purpleColor.withOpacity(.2),assetIcon: model[i].icon,
+                shadowColor: AppColors.lightOrange,radius: _width/15,
+                iconColor: i==0?AppColors.white:AppColors.black,),
 
               Padding(
-                padding:  EdgeInsets.all(_width/20),
+                padding: EdgeInsets.all(_width/20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Introduction',
+                    Text(model[i].courseName,
                       style: AppTextStyles.normalBoldFont12(context),),
-                    Text('2.50 min',
+                    Text((model[i].totalCourse),
                       textAlign: TextAlign.left,
                       style: AppTextStyles.normalLight(context),),
-
                   ],
                 ),
               ),
@@ -594,4 +681,201 @@ Widget myCourseContent(BuildContext context,var _height, _width){
       }
   );
 }
+
+
+Widget myResourcesContent(BuildContext context,var _height, _width, List<CategoryModel> model){
+  return ListView.builder(
+
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
+      itemCount: model.length,
+      itemBuilder:(BuildContext context, int i){
+        return Container(
+          height: _height/10,
+          margin: EdgeInsets.only(bottom: _width/25),
+          padding: EdgeInsets.only( left: _width/15),
+          decoration: new BoxDecoration(
+            color: AppColors.white,
+            borderRadius: new BorderRadius.all(Radius.circular(_width/35),
+            ),
+          ),
+          child: Row(
+            children: [
+
+              Container(
+                  height: _width/15,
+                  width: _width/15,
+                  child: Image.asset(Strings.docIcon,color: AppColors.orangeDarkColor,)),
+              Padding(
+                padding: EdgeInsets.all(_width/20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(model[i].courseName,
+                      style: AppTextStyles.normalBoldFont12(context),),
+
+                  Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(2),
+                          height: _width/30,
+                          width: _width/30,
+                          child: Image.asset(Strings.attachmentIcon,color: AppColors.black.withOpacity(.5),)),
+                      Text((model[i].totalCourse),
+                        textAlign: TextAlign.left,
+                        style: AppTextStyles.normalLight(context),),
+                    ],
+                  )
+                  ],
+                ),
+              ),
+
+              Expanded(
+                child: Container(
+                  height: _width/20,
+                    width: _width/20,
+                    margin: EdgeInsets.only(left: _width/5),
+                    child: Image.asset(Strings.down_arrowIcon,)),
+              )
+
+            ],
+          ),
+        );
+      }
+  );
+}
+
+
+Widget myQAContent(BuildContext context,var _height, _width, List<QAModel> model){
+  return ListView.builder(
+
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
+      itemCount: model.length,
+      itemBuilder:(BuildContext context, int i){
+        return Container(
+          height: _height/4,
+          width: _width,
+
+          margin: EdgeInsets.only(bottom: _width/25),
+          padding: EdgeInsets.only( left: _width/15),
+          decoration: new BoxDecoration(
+            color: AppColors.white,
+            borderRadius: new BorderRadius.all(Radius.circular(_width/35),
+            ),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+             Container(
+               width: _width,
+               child: Stack(
+                 children: [
+                   Row(
+                     children: [
+                       Container(
+                         padding: EdgeInsets.all(10),
+                         width: _width / 5,
+                         height: _width / 5,
+                         child: ClipRRect(
+                           borderRadius: new BorderRadius.circular(_width/30),
+                           child: Container(
+                               color: AppColors.greyColor,
+                               child: Padding(
+                                 padding: const EdgeInsets.all(5.0),
+                                 child: Image.asset(
+                                   Strings.userFaceIcon,
+                                 ),
+                               )),
+                         ),
+                       ),
+
+                       Padding(
+                         padding: EdgeInsets.all(_width/20),
+                         child: Column(
+                           mainAxisAlignment: MainAxisAlignment.center,
+                           crossAxisAlignment: CrossAxisAlignment.start,
+                           children: [
+                             Text(model[i].name,
+                               style: AppTextStyles.normalBoldFont12(context),),
+
+                             Text((model[i].date),
+                               textAlign: TextAlign.left,
+                               style: AppTextStyles.normalLight(context),),
+                           ],
+                         ),
+                       ),
+
+
+                     ],
+                   ),
+
+                   Positioned(
+                     right: 10,
+                     child:  CustomButton(text: model[i].className,myWidth: _width/4,
+                       myHeight: _width/13,buttonColor: AppColors.darkPrimaryColor,textColor: AppColors.white,),
+                   )
+                 ],
+               ),
+             ),
+
+
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text((model[i].myQuestion),
+                  textAlign: TextAlign.left,
+                  style:  TextStyle(
+                    color: AppColors.black,
+                    fontSize: DeviceSize.width(context) / 22,
+                    fontFamily: 'Poppins-Bold',
+                  ),
+                ),
+              ),
+
+              Row(
+                children: [
+                  Icon(Icons.favorite_border,color: Colors.black26,size: 18,),
+
+                 Padding(padding: EdgeInsets.only(left: 5),
+                 child:  Text((model[i].noLike),
+                   textAlign: TextAlign.left,
+                   style:  TextStyle(
+                     color: AppColors.black,
+                     fontSize: DeviceSize.width(context) / 30,
+                     fontFamily: 'Poppins-Light',
+                   ),
+                 ),
+                 ),
+
+                  SizedBox(width: _width/20,),
+
+                  Container(
+                    height: _width/25,
+                    width: _width/25,
+                    child: Image.asset(Strings.commentImg,),
+                  ),
+
+                  Padding(padding: EdgeInsets.only(left: 5),
+                    child:  Text((model[i].noComment),
+                      textAlign: TextAlign.left,
+                      style:  TextStyle(
+                        color: AppColors.black,
+                        fontSize: DeviceSize.width(context) / 30,
+                        fontFamily: 'Poppins-Light',
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: _width/2,),
+                Expanded(child: Icon(Icons.arrow_forward_outlined,color: Colors.black,size: _width/15,),)
+                ],
+              )
+            ],
+          ),
+        );
+      }
+  );
+}
+
+
 

@@ -14,6 +14,8 @@ class CustomButton extends StatelessWidget {
   var iconColor;
   var myHeight;
   Color buttonColor;
+  Color shadowColor;
+
   var radius;
   var textColor;
 
@@ -27,7 +29,7 @@ class CustomButton extends StatelessWidget {
       this.assetIcon,
       this.iconColor,
       this.radius,
-      this.textColor});
+      this.textColor,this.shadowColor});
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +43,13 @@ class CustomButton extends StatelessWidget {
         decoration: new BoxDecoration(
             color: buttonColor,
             borderRadius: new BorderRadius.all(
-              Radius.circular(radius!=null? radius:_width / 20),
-            )),
+              Radius.circular(radius!=null? radius :_width / 20),
+            ),
+
+
+        ),
+
+
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

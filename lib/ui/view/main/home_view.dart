@@ -1,3 +1,4 @@
+import 'package:education_app/core/model/course_model.dart';
 import 'package:education_app/core/res/app_colors.dart';
 import 'package:education_app/core/res/strings.dart';
 import 'package:education_app/core/res/text_styles.dart';
@@ -12,14 +13,42 @@ class HomeView extends StatefulWidget {
 
   String hintText;
 
+
   @override
   _HomeViewState createState() => _HomeViewState();
 }
+
+
+
 
 class _HomeViewState extends State<HomeView> {
 
   var _height;
   var _width;
+
+  List<MyCourseModel> _myList=[];
+
+
+
+  getCourseList(){
+
+    _myList.add(new MyCourseModel(courseName: 'Business analysis \nfundamentals',img:  Strings.login_img,price: 'USD \$35.00'));
+    _myList.add(new MyCourseModel(courseName: 'Business development \for startup',img:  Strings.login_img,price: 'USD \$36.00'));
+    _myList.add(new MyCourseModel(courseName: 'The Art of Sales: Mastering \nthe Selling Process',img: Strings.aosIcon,price: 'USD \$50.00'));
+    _myList.add(new MyCourseModel(courseName: 'Successful Negotiation: \nEssential Strategies and Skills',img:  Strings.rrIcon,price: 'USD \$35.00'));
+
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    getCourseList();
+
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +82,13 @@ class _HomeViewState extends State<HomeView> {
                   children: [
                     Text(
                       Strings.search,
-                      style: AppTextStyles.medium20(context),
+                      style: TextStyle(
+                        color: AppColors.black,
+                        fontSize: DeviceSize.width(context) / 24,
+                        fontFamily: 'Poppins-Regular',
+                      ),
                     ),
-                    customRoundButton(Icons.search, context),
+                    customRoundButton( context,icon: Icons.search),
                   ],
                 ),
               ),
@@ -76,7 +109,7 @@ class _HomeViewState extends State<HomeView> {
            Container(
              height: _height/4,
              margin: EdgeInsets.only(bottom: _height/20),
-             child: verticalList(context),
+             child: verticalList(context,_myList),
            )
 
           ],

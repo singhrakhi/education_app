@@ -1,4 +1,5 @@
 import 'package:education_app/core/utils/constatnts.dart';
+import 'package:education_app/ui/view/main/course_details.dart';
 import 'package:education_app/ui/view/main/home.dart';
 import 'package:education_app/ui/view/main/profile.dart';
 import 'package:education_app/ui/view/setup/forgot.dart';
@@ -45,7 +46,11 @@ class RouterApp {
         return MaterialPageRoute(
             builder: (BuildContext context) => MyProfile());
 
-      // case Constants.ResetPassword:
+      case Constants.COURSE_DETAILS:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => CourseDetailsView());
+
+    // case Constants.ResetPassword:
       //   String argument = settings.arguments;
       //   return MaterialPageRoute(
       //       builder: (BuildContext context) => ResetPassword(cellNumber: argument,));

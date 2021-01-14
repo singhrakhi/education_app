@@ -51,7 +51,7 @@ class _UserProfileState extends State<UserProfile> {
                        right: 0,
                        child: CustomButton(myHeight: _width/10,myWidth: _width/10,
                          buttonColor: AppColors.orangeDarkColor,assetIcon: Strings.editIcon,
-                       iconColor: AppColors.white,))
+                       iconColor: AppColors.white,shadowColor: AppColors.lightOrange,))
                  ],
 
                ),
@@ -112,6 +112,7 @@ class _UserProfileState extends State<UserProfile> {
                             myWidth: _width / 3.6,
                             buttonColor: AppColors.orangeDarkColor,
                             icon: Icons.library_books_outlined,
+
                           )
                         ],
                       ),

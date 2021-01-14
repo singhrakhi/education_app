@@ -1,3 +1,4 @@
+import 'package:education_app/core/model/course_content_model.dart';
 import 'package:education_app/core/res/app_colors.dart';
 import 'package:education_app/core/res/strings.dart';
 import 'package:education_app/core/res/styles.dart';
@@ -6,6 +7,8 @@ import 'package:education_app/core/utils/device_size.dart';
 import 'package:education_app/core/utils/widget.dart';
 import 'package:education_app/ui/shared/custom_button.dart';
 import 'package:education_app/ui/view/main/category_view.dart';
+import 'package:education_app/ui/view/main/qa_view.dart';
+import 'package:education_app/ui/view/main/resources_view.dart';
 import 'package:flutter/material.dart';
 
 class MyCourses extends StatefulWidget {
@@ -18,6 +21,30 @@ class _MyCoursesState extends State<MyCourses> {
   double _width;
   bool isCourseContent = true;
   bool isMoreContent = false;
+  List<CourseContentModel> _list = [];
+  var name = ['Introduction', 'What is digital marketing?'];
+  var durationList = ['2.50 min', '10.20 min'];
+
+  getCourseList(){
+
+    int j=0;
+for(var i in name){
+
+  print(durationList[j]);
+  _list.add(new CourseContentModel(heading: i,duration: durationList[j]));
+  j++;
+
+}
+
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getCourseList();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -127,7 +154,7 @@ class _MyCoursesState extends State<MyCourses> {
     return Container(
       padding: EdgeInsets.only(left: _width/15,right: _width/15),
       height: _height / 3,
-      child: myCourseContent(context, _height, _width),
+      child: myCourseContent(context, _height, _width,_list),
     );
   }
 
@@ -147,14 +174,20 @@ class _MyCoursesState extends State<MyCourses> {
 
           profileItem(context,
               title: Strings.qa,
-              onPress: () {},
+              onPress: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => QAView()));
+
+              },
               buttonColor: AppColors.purpleColor,
               assetIcon: Strings.commentImg,
               iconColor: AppColors.darkPrimaryColor),
 
           profileItem(context,
               title: Strings.resources,
-              onPress: () {},
+              onPress: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => ResourcesView()));
+
+              },
               buttonColor: AppColors.orangeDarkColor,
               assetIcon: Strings.menuNImg,
               iconColor: AppColors.orangeDarkColor),

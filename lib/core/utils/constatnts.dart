@@ -30,5 +30,6 @@ class Constants{
   static const String VERIFY_OTP = 'verifyOtp';
   static const String FORGOT_PASS = 'forgotPass';
   static const String PASS_SUCCESS = 'passSuccess';
+  static const String COURSE_DETAILS = 'courseDetails';
 
 }

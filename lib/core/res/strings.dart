@@ -136,6 +136,14 @@ static const String homeIcon = 'assets/images/home.png';
   static const String menuNImg =  'assets/images/menu_n.png';
   static const String commentImg =  'assets/images/comment.png';
   static const String categIcon =  'assets/images/categ.png';
+  static const String thumbsIcon =  'assets/images/thumbs.png';
+  static const String moneyIcon =  'assets/images/money.png';
+  static const String analyticsIcon =  'assets/images/analytics.png';
+  static const String controlsIcon =  'assets/images/controls.png';
+  static const String docIcon =  'assets/images/document.png';
+  static const String attachmentIcon =  'assets/images/attachment.png';
+  static const String aosIcon =  'assets/images/aos_logo.jpg';
+  static const String rrIcon =  'assets/images/rr.jpg';
 
 
 

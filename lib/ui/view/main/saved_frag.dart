@@ -1,3 +1,4 @@
+import 'package:education_app/core/model/course_model.dart';
 import 'package:education_app/core/res/app_colors.dart';
 import 'package:education_app/core/res/strings.dart';
 import 'package:education_app/core/res/text_styles.dart';
@@ -17,10 +18,37 @@ class SavedFrag extends StatefulWidget {
 class _SavedFragState extends State<SavedFrag> {
   var _width;
   var _height;
+
+
+  List<MyCourseModel> _myList=[];
+
+
+
+  getCourseList(){
+
+    _myList.add(new MyCourseModel(courseName: 'Business analysis \nfundamentals',img:  Strings.login_img,price: 'USD \$35.00'));
+    _myList.add(new MyCourseModel(courseName: 'Business development \for startup',img:  Strings.login_img,price: 'USD \$36.00'));
+    _myList.add(new MyCourseModel(courseName: 'The Art of Sales: Mastering \nthe Selling Process',img: Strings.aosIcon,price: 'USD \$50.00'));
+    _myList.add(new MyCourseModel(courseName: 'Successful Negotiation: \nEssential Strategies and Skills',img:  Strings.rrIcon,price: 'USD \$35.00'));
+    _myList.add(new MyCourseModel(courseName: 'Fundamentals of Project Planning and Management',img: Strings.aosIcon,price: 'USD \$50.00'));
+    _myList.add(new MyCourseModel(courseName: 'Successful Negotiation: \nEssential Strategies and Skills',img:  Strings.rrIcon,price: 'USD \$35.00'));
+
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    getCourseList();
+
+  }
+
   @override
   Widget build(BuildContext context) {
     _width = DeviceSize.width(context);
     _height = DeviceSize.height(context);
+
 
     return SingleChildScrollView(
       child:Container(
@@ -47,9 +75,13 @@ class _SavedFragState extends State<SavedFrag> {
                   children: [
                     Text(
                       Strings.startup,
-                      style: AppTextStyles.medium20(context),
+                      style: TextStyle(
+                        color: AppColors.black,
+                        fontSize: DeviceSize.width(context) / 24,
+                        fontFamily: 'Poppins-Regular',
+                      ),
                     ),
-                    customRoundButton(Icons.close, context),
+                    customRoundButton( context,icon: Icons.close,),
                   ],
                 ),
               ),
@@ -58,7 +90,7 @@ class _SavedFragState extends State<SavedFrag> {
             Container(
               height: _height/1.5,
               margin: EdgeInsets.only(bottom: _height/20),
-              child: verticalList(context),
+              child: verticalList(context,_myList),
             )
           ],
 
